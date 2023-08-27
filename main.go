@@ -11,8 +11,15 @@ func main() {
 	size := len(os.Args)
 
 	if size < 2 {
-		fmt.Println("[ERROR] Argument is mandatory")
+		fmt.Println("Argument is mandatory")
+		printExplanationMessage()
 		os.Exit(1)
+	}
+
+	if size > 2 {
+		fmt.Println("Too many arguments")
+		printExplanationMessage()
+		os.Exit(2)
 	}
 
 	pass := os.Args[1]
@@ -20,9 +27,14 @@ func main() {
 	hashed, err := bcrypt.GenerateFromPassword([]byte(pass), 10)
 
 	if err != nil {
-		fmt.Println("[ERROR] Hash could not be generated", err.Error())
-		os.Exit(2)
+		fmt.Println("Hash could not be generated", err.Error())
+		os.Exit(3)
 	}
 
 	fmt.Println(string(hashed))
+}
+
+func printExplanationMessage() {
+	fmt.Println("Example: hashit mypassword")
+	fmt.Println("Produces: $myhashedpassword")
 }
