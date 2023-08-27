@@ -17,7 +17,7 @@ func main() {
 
 	pass := os.Args[1]
 
-	hashed, err := bcrypt.GenerateFromPassword([]byte(pass), 15)
+	hashed, err := bcrypt.GenerateFromPassword([]byte(pass), 10)
 
 	if err != nil {
 		fmt.Println("[ERROR] Hash could not be generated", err.Error())
